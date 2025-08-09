@@ -186,12 +186,25 @@ def create_revenue_trend_chart(current_data, previous_data, current_year, previo
             yaxis_title="Revenue"
         )
     
+    # Custom Y-axis formatting function
+    def format_yticks(value):
+        if value >= 1e6:
+            return f"${value/1e6:.0f}M"
+        elif value >= 1e3:
+            return f"${value/1e3:.0f}K"
+        else:
+            return f"${value:.0f}"
+    
     fig.update_layout(
         showlegend=True,
         hovermode='x unified',
         plot_bgcolor='white',
         xaxis=dict(showgrid=True, gridcolor='#f0f0f0'),
-        yaxis=dict(showgrid=True, gridcolor='#f0f0f0', tickformat='$,.0f'),
+        yaxis=dict(
+            showgrid=True, 
+            gridcolor='#f0f0f0',
+            tickformat='$,.0s'  # This will format as K/M
+        ),
         height=350,
         margin=dict(t=50, b=50, l=50, r=50)
     )
@@ -230,7 +243,7 @@ def create_category_chart(sales_data):
         xaxis_title="Revenue",
         yaxis_title="",
         plot_bgcolor='white',
-        xaxis=dict(showgrid=True, gridcolor='#f0f0f0', tickformat='$,.0f'),
+        xaxis=dict(showgrid=True, gridcolor='#f0f0f0', tickformat='$,.0s'),
         yaxis=dict(showgrid=False),
         height=350,
         margin=dict(t=50, b=50, l=150, r=50)
@@ -337,14 +350,14 @@ def main():
         st.error("Failed to load data. Please check your data files.")
         return
     
-    # Header with title and date filters
-    col1, col2, col3 = st.columns([2, 1, 1])
+    # Header with title and date filters - aligned as requested
+    col1, spacer, col2 = st.columns([3, 1, 2])
     
     with col1:
-        st.title("📊 E-commerce Analytics Dashboard")
+        st.title("E-commerce Analytics Dashboard")
     
     with col2:
-        # Get available years from data
+        # Year filter aligned to the right
         orders_data = processed_data['orders']
         available_years = sorted(orders_data['purchase_year'].unique(), reverse=True)
         
@@ -359,19 +372,9 @@ def main():
             index=default_year_index,
             key="year_filter"
         )
-    
-    with col3:
-        # Month filter
-        month_options = ['All Months'] + [f'Month {i}' for i in range(1, 13)]
-        selected_month_display = st.selectbox(
-            "Select Month",
-            options=month_options,
-            index=0,
-            key="month_filter"
-        )
         
-        # Convert display to actual month number
-        selected_month = None if selected_month_display == 'All Months' else int(selected_month_display.split(' ')[1])
+        # Month filter removed as per requirements - using year only
+        selected_month = None
     
     # Create datasets based on selected year and month
     current_data = loader.create_sales_dataset(
@@ -504,16 +507,16 @@ def main():
             """, unsafe_allow_html=True)
     
     with bottom_col2:
-        # Review score
+        # Review Score with large number and stars as specified
         if 'review_score' in current_data.columns:
             avg_review = current_data['review_score'].mean()
-            stars = "★" * int(round(avg_review))
+            stars = "★" * int(round(avg_review)) + "☆" * (5 - int(round(avg_review)))
             
             st.markdown(f"""
             <div class="bottom-card">
-                <p class="metric-label">Average Review Score</p>
-                <p class="metric-value">{avg_review:.1f}/5.0</p>
-                <p class="stars">{stars}</p>
+                <p class="metric-value" style="font-size: 3rem; margin-bottom: 0.5rem;">{avg_review:.1f}</p>
+                <p class="stars" style="font-size: 1.5rem; margin: 0.5rem 0;">{stars}</p>
+                <p class="metric-label" style="margin-top: 0.5rem;">Average Review Score</p>
             </div>
             """, unsafe_allow_html=True)
         else:

@@ -96,17 +96,36 @@ data_analysis/
    streamlit run dashboard.py
    ```
 
-2. **Navigate the interface**:
-   - Use the **year filter** in the top-right to select analysis period
-   - View **KPI cards** showing key metrics with trend indicators
-   - Explore **interactive charts** in the 2x2 grid layout
-   - Monitor **customer experience metrics** in the bottom row
+2. **Dashboard Layout**:
+   The dashboard follows a professional layout with these sections:
+   
+   **Header Row**:
+   - **Title**: "E-commerce Analytics Dashboard" (left-aligned)
+   - **Year Filter**: Dropdown selector (right-aligned) that applies globally to all visualizations
+   
+   **KPI Row** (4 cards):
+   - **Total Revenue**: with trend indicator vs previous year
+   - **Monthly Growth**: average month-over-month growth percentage  
+   - **Average Order Value**: with trend indicator vs previous year
+   - **Total Orders**: with trend indicator vs previous year
+   
+   **Charts Grid** (2x2 layout):
+   - **Revenue Trend**: Line chart showing current year (solid line) vs previous year (dashed line)
+   - **Top 10 Categories**: Horizontal bar chart with blue gradient, sorted descending
+   - **Revenue by State**: US Choropleth map with blue color scale
+   - **Satisfaction vs Delivery**: Bar chart showing review scores by delivery time buckets
+   
+   **Bottom Row** (2 cards):
+   - **Average Delivery Time**: with trend indicator
+   - **Review Score**: Large number with star rating display
 
 3. **Dashboard Features**:
    - **Real-time filtering**: All charts update automatically when year is changed
-   - **Professional styling**: Clean, business-ready interface
-   - **Trend indicators**: Green/red arrows showing performance changes
-   - **Formatted values**: Currency displayed as $300K, $2M for readability
+   - **Professional styling**: Clean, business-ready interface with uniform card heights
+   - **Trend indicators**: Green/red arrows with two decimal places showing performance changes
+   - **Formatted values**: Currency displayed as $300K, $2M for readability (no icons used)
+   - **Interactive charts**: All visualizations built with Plotly for professional presentation
+   - **Grid lines**: Added to charts for easier reading as specified
 
 ### Notebook Analysis
 
@@ -282,26 +301,29 @@ def plot_custom_metric(self, data):
 
 ## Dashboard Features
 
-### Layout Structure
-- **Header**: Title with year selection filter (applies globally)
-- **KPI Row**: 4 metric cards with trend indicators
+### Layout Structure (Exact Implementation)
+- **Header**: Title left-aligned, Year filter right-aligned (applies globally to all charts)
+- **KPI Row**: 4 metric cards with trend indicators showing two decimal places
   - Total Revenue, Monthly Growth, Average Order Value, Total Orders
   - Color-coded trends (green for positive, red for negative)
-- **Charts Grid**: 2x2 interactive visualization layout
-  - Revenue trend (current vs previous year)
-  - Top 10 product categories bar chart
-  - US state choropleth map
-  - Customer satisfaction vs delivery time analysis
-- **Bottom Row**: Customer experience metrics
-  - Average delivery time with trend
-  - Review score with star rating
+  - Uniform card heights maintained across the row
+- **Charts Grid**: 2x2 interactive Plotly visualization layout
+  - Revenue trend with solid line (current) and dashed line (previous year)  
+  - Top 10 product categories horizontal bar chart with blue gradient
+  - US state choropleth map with blue color scale
+  - Customer satisfaction vs delivery time bar chart (1-3 days, 4-7 days, 8+ days buckets)
+- **Bottom Row**: Customer experience metrics with uniform card heights
+  - Average delivery time with trend indicator
+  - Review score with large number display and star rating
 
 ### Technical Features
-- **Real-time Filtering**: All visualizations update automatically
-- **Professional Styling**: Business-ready interface with uniform card heights
+- **Y-axis Formatting**: Currency values formatted as $300K, $2M instead of $300,000
+- **No Icons**: Professional styling without icon usage as specified
+- **Grid Lines**: Added to charts for easier reading
+- **Real-time Filtering**: All visualizations update automatically when year filter changes
+- **Professional Styling**: Business-ready interface with consistent formatting
 - **Plotly Charts**: Interactive, publication-quality visualizations
-- **Responsive Design**: Adapts to different screen sizes
-- **Error Handling**: Graceful handling of missing data
+- **Error Handling**: Graceful handling of missing data with appropriate fallbacks
 
 ## Future Enhancements
 
