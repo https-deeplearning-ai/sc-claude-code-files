@@ -77,7 +77,12 @@ data_analysis/
 
 4. **Run the applications**:
 
-   **For Streamlit Dashboard**:
+   **For Professional Dashboard (NEW)**:
+   ```bash
+   streamlit run dashboard_new.py
+   ```
+
+   **For Original Dashboard**:
    ```bash
    streamlit run dashboard.py
    ```
@@ -89,14 +94,58 @@ data_analysis/
 
 ## Usage Guide
 
-### Streamlit Dashboard
+### Professional Streamlit Dashboard (NEW)
 
-1. **Launch the dashboard**:
+#### dashboard_new.py - Converted from EDA_Refactored.ipynb
+
+1. **Launch the professional dashboard**:
+   ```bash
+   streamlit run dashboard_new.py
+   ```
+
+2. **Professional Dashboard Layout**:
+   The new dashboard follows the exact layout specifications with professional styling:
+   
+   **Header Section**:
+   - **Title**: "E-commerce Analytics Dashboard" (left-aligned)
+   - **Year Filter**: Dropdown selector (right-aligned) that applies globally to all visualizations
+   
+   **KPI Row** (4 cards with uniform heights):
+   - **Total Revenue**: with trend indicator vs previous year (green/red arrows)
+   - **Monthly Growth**: average month-over-month growth percentage  
+   - **Average Order Value**: with trend indicator vs previous year (green/red arrows)
+   - **Total Orders**: with trend indicator vs previous year (green/red arrows)
+   
+   **Charts Grid** (2x2 layout):
+   - **Revenue Trend**: Line chart with solid line (current year) vs dashed line (previous year), grid lines, Y-axis as $300K format
+   - **Top 10 Categories**: Horizontal bar chart with blue gradient, sorted descending, values as $300K/$2M
+   - **Revenue by State**: US Choropleth map with blue color scale
+   - **Satisfaction vs Delivery**: Bar chart showing review scores by delivery time buckets (1-3 days, 4-7 days, 8+ days)
+   
+   **Bottom Row** (2 cards with uniform heights):
+   - **Average Delivery Time**: Large number with trend indicator
+   - **Review Score**: Large number with star rating display and "Average Review Score" subtitle
+
+3. **Professional Features**:
+   - **Real-time filtering**: All charts update automatically when year is changed
+   - **Trend indicators**: Green/red arrows with two decimal places showing performance changes
+   - **Professional styling**: Clean, business-ready interface without icons
+   - **Plotly charts**: All visualizations use Plotly for professional presentation
+   - **Formatted values**: Currency displayed as $300K, $2M for readability
+   - **Grid lines**: Added to charts for easier reading
+   - **Uniform card heights**: Consistent sizing across rows
+   - **Data caching**: Optimized performance with Streamlit caching
+
+### Original Streamlit Dashboard
+
+#### dashboard.py - Original Implementation
+
+1. **Launch the original dashboard**:
    ```bash
    streamlit run dashboard.py
    ```
 
-2. **Dashboard Layout**:
+2. **Original Dashboard Layout**:
    The dashboard follows a professional layout with these sections:
    
    **Header Row**:
@@ -131,7 +180,7 @@ data_analysis/
 
 1. **Open the refactored notebook**: `EDA_Refactored.ipynb`
 
-2. **Configure analysis parameters** in the first code cell:
+2. **Configure analysis parameters** in the Configuration & Setup section:
    ```python
    ANALYSIS_YEAR = 2023        # Year to analyze
    COMPARISON_YEAR = 2022      # Comparison year (optional)
@@ -140,6 +189,37 @@ data_analysis/
    ```
 
 3. **Run all cells** to generate the complete analysis
+
+#### EDA_Refactored.ipynb Features
+
+The refactored notebook provides a professional, well-structured analysis with:
+
+**Notebook Structure:**
+- **Table of Contents**: Clickable navigation between sections
+- **Introduction & Business Objectives**: Clear analysis goals and KPIs
+- **Configuration & Setup**: Flexible parameters for any time period
+- **Data Dictionary**: Comprehensive explanation of business terms and metrics
+- **Modular Analysis Sections**: Revenue, Product, Geographic, and Customer Experience
+- **Executive Summary**: Strategic recommendations and actionable insights
+
+**Technical Improvements:**
+- **Configurable Framework**: Easily analyze any year/month combination
+- **Module Integration**: Uses existing data_loader.py and business_metrics.py
+- **Clean Code**: Eliminates pandas warnings and follows best practices
+- **Professional Visualizations**: Business-ready charts with proper formatting
+- **Comprehensive Documentation**: Detailed explanations and insights
+
+**Analysis Sections:**
+1. **Revenue Performance**: Total revenue, growth rates, monthly trends, AOV analysis
+2. **Product Categories**: Top performers, revenue share, market analysis
+3. **Geographic Performance**: State-level revenue, market penetration, choropleth maps
+4. **Customer Experience**: Satisfaction scores, delivery performance, correlation analysis
+
+**Key Benefits:**
+- **Reusable**: Works with any date range without code modifications
+- **Maintainable**: Clear structure for future analysts
+- **Business-Oriented**: Focuses on actionable insights rather than technical details
+- **Professional Output**: Publication-ready visualizations and reports
 
 ### Advanced Configuration
 
