@@ -1,1 +1,11 @@
+# macOS
 .DS_Store
+
+# Virtual environment
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Claude Code local settings
+.claude/settings.local.json
